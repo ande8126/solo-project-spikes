@@ -19,7 +19,8 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import CreateLetter from '../CreateLetter/CreateLetter'
+import CreateLetter from '../CreateLetter/CreateLetter';
+import RequestList from '../RequestList/RequestList';
 
 import './App.css';
 
@@ -67,11 +68,18 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows CreateLetter else shows LoginPage
             exact
             path="/create"
           >
             <CreateLetter />
+          </ProtectedRoute>
+          <ProtectedRoute
+            // logged in shows CreateLetter else shows LoginPage
+            exact
+            path="/list"
+          >
+            <RequestList />
           </ProtectedRoute>
 
           {/* When a value is supplied for the authRedirect prop the user will

@@ -28,10 +28,16 @@ function Nav() {
         </Link>
         {user.id && (
           <>
+            <Link className="navLink" to="/list">
+              Requests
+            </Link>
+          </>
+        )}
+        {user.id && (
+          <>
             <Link className="navLink" to="/create">
               Create Letter
             </Link>
-            <LogOutButton className="navLink" />
           </>
         )}
         {user.id && (

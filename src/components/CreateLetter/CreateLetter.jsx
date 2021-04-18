@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
+import useClippy from 'use-clippy';
 
 
 const CreateLetter = () => {
     //needed for dispatch
     const dispatch = useDispatch();
 
-    //SPIKE: PREPOPULATE TEXT FROM TABLE
+    //SPIKE #1: PREPOPULATE TEXT FROM TABLE
     //GET TEXT DOWN FROM DB
     //handler for dropdown to send GET request to db
     const getStateLetter = ( event ) =>{
@@ -18,8 +19,18 @@ const CreateLetter = () => {
         return store.letter;
     })
     
-    //GET TO TEXTBOX
-    ////HOW DO I DO THIS????
+    //SPIKE #2: ALLOW USER TO COPY TO CLIPBOARD
+    //useClippy tool imported, acts like useState
+    const [ clipboard, setClipboard ] = useClippy();
+
+    //disable button if text is already copied
+    const isDisabled = clipboard === text;
+
+    const handleCopy = React.useCallback(()=>{
+        setClipboard(text)
+    }, [setClipboard, text])
+
+
     return (
         <div>
             <h2>Create request</h2>
@@ -28,7 +39,8 @@ const CreateLetter = () => {
                 <option>test</option>
                 <option>test2</option>
             </select>
-            <textarea value={text} onClick={navigator.clipboard.writeText(text)} ></textarea>
+            <textarea value={text} ></textarea>
+            <button disabled = {isDisabled} onClick={handleCopy}>Copy</button>
         </div>
     )
 }
