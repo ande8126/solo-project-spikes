@@ -6,7 +6,7 @@ import React from 'react';
  * experiment with theme (make theme.js, ThemeProvider in index.js)
  * 
 */
-import { Button, Typography } from '@material-ui/core';
+import { Button, Switch, FormControlLabel, FormGroup, Typography } from '@material-ui/core';
 //customize MaterialUI settings with MakeStyles
 import { makeStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
@@ -15,6 +15,16 @@ import Grid from '@material-ui/core/Grid'
 
 
 const RequestItem = () => {
+    //setup for Switch
+    const [state, setState] = React.useState({
+        checkedA: false,
+        checkedB: true,
+    });
+   //function for switch -- still need to learn how to toggle on DOM?? 
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
+
 
     //makeStyles changes here:
     const useStyles = makeStyles({
@@ -55,11 +65,12 @@ const RequestItem = () => {
                 </Grid>
                 <Grid item xs={2} />
                 <Grid item xs={4}>
-                    <label className="switch">
-                    <input type="checkbox" />
-                    <span className="slider"></span>
-                    Response
-                    </label>
+                    <FormGroup row>
+                        <FormControlLabel
+                        control={<Switch checked={state.checkedA} onChange={handleChange} />}
+                        label="Response"
+                        />
+                    </FormGroup>
                 </Grid>
                 <Grid item xs={8}>
                     <Button 
