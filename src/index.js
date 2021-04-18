@@ -4,6 +4,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+//SPIKE: pass ThemeProvider for MaterialUI and theme.js
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './MaterialUI/theme'
 
 import rootReducer from './redux/reducers/_root.reducer'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas/_root.saga'; // imports ./redux/sagas/index.js
@@ -32,8 +35,10 @@ const store = createStore(
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
+  <ThemeProvider theme={theme}>
   <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+  </ThemeProvider>,
   document.getElementById('react-root'),
 );
