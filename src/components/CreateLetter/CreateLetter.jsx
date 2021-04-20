@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import useClippy from 'use-clippy';
 
@@ -6,6 +6,13 @@ import useClippy from 'use-clippy';
 const CreateLetter = () => {
     //needed for dispatch
     const dispatch = useDispatch();
+
+
+
+    //function to handle textbox
+    const handleText = ( event ) =>{
+        setText( event.target.value );
+    }
 
     //SPIKE #1: PREPOPULATE TEXT FROM TABLE
     //GET TEXT DOWN FROM DB
@@ -15,9 +22,12 @@ const CreateLetter = () => {
     }
 
     //useSelector to draw from redux
-    const text = useSelector( ( store )=>{
+    const starterText = useSelector( ( store )=>{
         return store.letter;
     })
+
+    //local state for textbox
+    const [ text, setText ] = useState('')
     
     //SPIKE #2: ALLOW USER TO COPY TO CLIPBOARD
     //useClippy tool imported, acts like useState
@@ -26,20 +36,20 @@ const CreateLetter = () => {
     //disable button if text is already copied
     const isDisabled = clipboard === text;
 
-    const handleCopy = React.useCallback(()=>{
-        setClipboard(text)
-    }, [setClipboard, text])
+    const handleCopy = useCallback(()=>{
+        setClipboard( text )
+    }, [ setClipboard, text ])
 
 
     return (
         <div>
             <h2>Create request</h2>
             <select onChange={getStateLetter}>
-                <option disabled value>Please select</option>
+                <option value=''>Please select</option>
                 <option>test</option>
                 <option>test2</option>
             </select>
-            <textarea value={text} ></textarea>
+            <p><textarea cols="50" rows="6" onChange={()=>handleText} defaultValue={starterText} /></p>
             <button disabled = {isDisabled} onClick={handleCopy}>Copy</button>
         </div>
     )

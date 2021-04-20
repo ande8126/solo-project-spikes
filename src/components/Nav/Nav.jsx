@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
+import {
+  Drawer as MUIDrawer,
+  ListItem,
+  List,
+  ListItemIcon,
+  ListItemText
+} from '@material-ui/core';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -18,11 +25,16 @@ function Nav() {
   }
 
   return (
-    <div className="nav">
-      <Link to="/home">
+    <MUIDrawer variant = "permanent">
+    {/* <div className="nav"> */}
+      {/* <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
-      </Link>
-      <div>
+      </Link> */}
+      <List>
+        {/* {["Home", "Requests", "Create Letter"].map((text, index)=>
+        )} */}
+      </List>
+      {/* <div>
         <Link className="navLink" to={loginLinkData.path}>
           {loginLinkData.text}
         </Link>
@@ -52,8 +64,9 @@ function Nav() {
         <Link className="navLink" to="/about">
           About
         </Link>
-      </div>
-    </div>
+      </div> */}
+    {/* </div> */}
+    </MUIDrawer>
   );
 }
 

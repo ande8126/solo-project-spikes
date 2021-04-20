@@ -5,6 +5,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core'
 
 import { useDispatch } from 'react-redux';
 
@@ -26,6 +27,9 @@ import './App.css';
 
 function App() {
   const dispatch = useDispatch();
+  const useStyles = makeStyles({
+    
+  })
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
